@@ -25,7 +25,7 @@ const Screen2 = ({ navigation }) => {
         minimumTrackTintColor="#D3D3D3"
         maximumTrackTintColor="#000000"
         onValueChange={(e) => setSlide(Math.floor(e))}
-        value
+        value={value}
         onStartShouldSetResponder={(event) => console.log(event)}
       />
     </View>
