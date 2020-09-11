@@ -1,22 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { Actions } from "react-native-router-flux";
 import Slider from "@react-native-community/slider";
 
-const Screen2 = () => {
-  const [value, setValue] = useState(0);
+import { useSlide } from "../context/slideContext";
+
+const Screen2 = ({ navigation }) => {
+  const { slide, setSlide } = useSlide();
+
+  useEffect(() => {
+    navigation.setParams({
+      title: String(slide),
+    });
+  }, [slide]);
+
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 26, textAlign: "center" }}>
-        {Math.floor(value)}
-      </Text>
+      <Text style={{ fontSize: 26, textAlign: "center" }}>{slide}</Text>
       <Slider
         style={{ width: 280, height: 60 }}
         minimumValue={0}
         maximumValue={100}
         minimumTrackTintColor="#D3D3D3"
         maximumTrackTintColor="#000000"
-        onValueChange={(e) => setValue(e)}
-        value={value}
+        onValueChange={(e) => setSlide(Math.floor(e))}
+        value={slide}
         onStartShouldSetResponder={(event) => console.log(event)}
       />
     </View>
